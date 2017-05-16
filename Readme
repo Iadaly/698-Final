@@ -1,0 +1,70 @@
+This contains documentation as to setting up an ansible server, it's a little sloppy, but I understand it so it works for me. 
+I intend to update it soon. 
+
+Setting up and ansible server 
+
+Task 1) 
+
+Final project for Comp 698
+
+Docker cloud test, this needs to be addressed first as these are the files that will be running on the server 
+Clone the repo from https://github.com/Iadaly/docker-cloud-test2 
+
+I just made the git hub repo, and the docker repo for my final. things are going smoothly.
+
+Uhh so I cloned the repo to my system. I added most of the files from docker-cloud-test2. Not including the ansible files. I made three branches. master, firstBranch, and Compare. master and firestBranch have been merged. All of this has been pushed to github. I also did a pull request between master and Compare, and there are no conflicts.`-
+This means that the repo can be pulled and used as is
+
+    * first flask server
+    * Web Server
+    * ansible configuration
+    * metrics page
+Task 2) creating the flask server 
+
+Part 1) ssh into the server using the command line 
+The format should be as follows:
+ssh -1 keyname.key usetname@ipaddress  
+
+The current command to get into the server:
+ssh -i /home/tyrion/Documents/idaly-1492664667.key idaly@54.193.53.39
+
+It should be noted that Server had been wiped, as was expected 
+
+Checked 54.193.53.39:8080 for giggles, it’s there but it refuses to connect, not shocking as I’ve loaded nothing onto the site. 
+
+It’s at this point where I’m going to try and setup the server 
+
+Task 3) Configure the server
+
+# Check that the docker service is actually running
+ps aux | grep docker
+# Check that you can run a simple container
+docker run ubuntu:xenial echo "hello world"
+Git clone a copy of your docker-cloud-test repo onto the server.
+Git clone https://github.com/Iadaly/698-Final.git
+You should be able to run the following commands.
+# This will build a local image of your docker cloud Flask server
+docker build -t test /path/to/Dockerfile
+# Verify that git works
+git log --oneline --decorate
+sudo apt install docker.io - docker needs to be installed 
+sudo docker build -t test /home/idaly/698-Final
+git log --oneline --decorate
+
+4) Pull the latest copy of your public docker-cloud-test image.
+
+sudo docker pull thedalyshow/final-cloud-test:latest
+sudo docker run thedalyshow/final-cloud-test ls
+sudo docker images
+
+5) start a container using your public docker-cloud-test image.
+
+sudo docker run -d -p 8080:8080 thedalyshow/final-cloud-test python3 unh698.py
+sudo docker ps -a
+
+
+It is at this point I’m running into issues. I created an image, however there is no site at the ip 
+54.193.53.39:8080 or 54.193.53.39:8081
+I also created a new image using 8081:8081, although I’m not sure if that’s correct 
+
+
